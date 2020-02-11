@@ -43,7 +43,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def mostrar(self):
         for libro in self.libros:
-            print(libro)
+            print(libro['titulo'], libro['autor'], libro['year'], libro['editorial'])
 
     @Slot()
     def abrir(self):
