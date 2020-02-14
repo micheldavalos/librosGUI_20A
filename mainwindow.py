@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QTableWidgetItem
 from ui_mainwindow import Ui_MainWindow
 from PySide2.QtCore import Slot
 import json
@@ -17,6 +17,8 @@ class MainWindow(QMainWindow):
 
         self.ui.actionAbrir.triggered.connect(self.abrir)
         self.ui.actionGuardar.triggered.connect(self.guardar)
+
+        self.ui.mostrar_tabla.clicked.connect(self.mostrar_tabla)
 
 
     @Slot()
@@ -50,8 +52,6 @@ class MainWindow(QMainWindow):
                 print(key+": ", value)
                 self.ui.salida.insertPlainText(key+": " + value + '\n')
 
-
-
     @Slot()
     def abrir(self):
         ubicacion = QFileDialog.getOpenFileName(self,
@@ -73,3 +73,25 @@ class MainWindow(QMainWindow):
         #print(ubicacion)
         with open(ubicacion[0], 'w') as archivo:
             json.dump(self.libros, archivo, indent=5)
+
+    @Slot()
+    def mostrar_tabla(self):
+        self.ui.tabla.setColumnCount(4)
+        self.ui.tabla.setRowCount(len(self.libros))
+
+        labels = ['Título', 'Autor', 'Año', 'Editorial']
+        self.ui.tabla.setHorizontalHeaderLabels(labels)
+
+        row = 0
+        for libro in self.libros:
+            titulo = QTableWidgetItem(libro['titulo'])
+            autor = QTableWidgetItem(libro['autor'])
+            year = QTableWidgetItem(str(libro['year']))
+            editorial = QTableWidgetItem(libro['editorial'])
+
+            self.ui.tabla.setItem(row, 0, titulo)
+            self.ui.tabla.setItem(row, 1, autor)
+            self.ui.tabla.setItem(row, 2, year)
+            self.ui.tabla.setItem(row, 3, editorial)
+
+            row += 1
