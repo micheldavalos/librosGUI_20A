@@ -44,6 +44,13 @@ class MainWindow(QMainWindow):
     def mostrar(self):
         for libro in self.libros:
             print(libro['titulo'], libro['autor'], libro['year'], libro['editorial'])
+            for key, value in libro.items():
+                if type(value) is int:
+                    value = str(value)
+                print(key+": ", value)
+                self.ui.salida.insertPlainText(key+": " + value + '\n')
+
+
 
     @Slot()
     def abrir(self):
