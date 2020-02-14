@@ -6,16 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>462</width>
-    <height>395</height>
+    <width>590</width>
+    <height>407</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Libros</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>1</number>
@@ -98,11 +98,25 @@
        <attribute name="title">
         <string>Tabla</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="buscar_entrada"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buscar">
+            <property name="text">
+             <string>Buscar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QTableWidget" name="tabla"/>
         </item>
-        <item row="1" column="0">
+        <item>
          <widget class="QPushButton" name="mostrar_tabla">
           <property name="text">
            <string>Mostrar</string>
@@ -120,7 +134,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>462</width>
+     <width>590</width>
      <height>22</height>
     </rect>
    </property>

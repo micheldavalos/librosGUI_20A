@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.ui.actionGuardar.triggered.connect(self.guardar)
 
         self.ui.mostrar_tabla.clicked.connect(self.mostrar_tabla)
+        self.ui.buscar.clicked.connect(self.buscar)
 
 
     @Slot()
@@ -76,14 +77,31 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def mostrar_tabla(self):
+        self.libros_tabla(self.libros)
+
+    @Slot()
+    def buscar(self):
+        libros = []
+
+        autor = self.ui.buscar_entrada.text()
+
+        for libro in self.libros:
+            if autor == libro['autor']:
+                libros.append(libro)
+
+        self.libros_tabla(libros)
+
+    def libros_tabla(self, libros):
+        self.ui.tabla.clear()
+
         self.ui.tabla.setColumnCount(4)
-        self.ui.tabla.setRowCount(len(self.libros))
+        self.ui.tabla.setRowCount(len(libros))
 
         labels = ['Título', 'Autor', 'Año', 'Editorial']
         self.ui.tabla.setHorizontalHeaderLabels(labels)
 
         row = 0
-        for libro in self.libros:
+        for libro in libros:
             titulo = QTableWidgetItem(libro['titulo'])
             autor = QTableWidgetItem(libro['autor'])
             year = QTableWidgetItem(str(libro['year']))
@@ -95,3 +113,4 @@ class MainWindow(QMainWindow):
             self.ui.tabla.setItem(row, 3, editorial)
 
             row += 1
+
